@@ -33,8 +33,15 @@ static class Window extends JFrame {
                 @Override
                 public void mouseClicked(MouseEvent e) {
 
-                    name.setForeground(Color.white);
-                    name.setFont(new Font("sans-serif", Font.BOLD, 17));
+                    try {
+                        Desktop.getDesktop().browse(URI.create(String.valueOf(reqGithub.uri().toURL())));
+                        name.setText("Visited Profile");
+                        name.setForeground(Color.white);
+                        name.setFont(new Font("sans-serif", Font.BOLD, 17));
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+
 
                     super.mouseClicked(e);
 
@@ -60,7 +67,7 @@ static class Window extends JFrame {
             throw new RuntimeException(e);
         }
     }
-    
+
 }
 
 void main() {
